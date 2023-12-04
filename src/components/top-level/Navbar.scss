@@ -1,0 +1,31 @@
+nav {
+  ul {
+    li {
+      @apply mb-3 md:mb-0;
+      a {
+        @apply hover:text-white hover:border-white relative;
+        span {
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+            transform: scaleX(0);
+            transform-origin: right center;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+          }
+        }
+        &:hover {
+          span::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+    }
+  }
+}
