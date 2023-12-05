@@ -4,13 +4,15 @@ export default {
     './src/**/*.html',
     './src/**/*.js',
     './src/**/*.jsx',
+    './src/**/*.tsx',
     './src/**/*.scss',
     'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   theme: {
     extend: {
       colors: {
-        dark: '#111827'
+        dark: '#111827',
+        variant: '#1F2937',
       }
     },
   },

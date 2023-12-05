@@ -1,0 +1,19 @@
+.car-movement {
+  @apply overflow-hidden h-auto w-full relative z-[100];
+}
+
+.car-movement > .car {
+  @apply relative z-[100];
+  animation: linear;
+  animation-name: run;
+  animation-duration: 1.5s;
+}
+
+@keyframes run {
+  0% {
+    left: 25%;
+  }
+  100% {
+    left: 0;
+  }
+}

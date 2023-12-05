@@ -3,5 +3,28 @@
 @tailwind utilities;
 
 html {
-    @apply bg-dark text-[#f4f4f4] overflow-x-hidden w-screen;
+  @apply bg-dark text-[#f4f4f4] overflow-x-hidden w-screen;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@layer components {
+  .large-container {
+    @apply max-w-[1250px] mx-auto;
+  }
+  .medium-container {
+    @apply max-w-[1024px] mx-auto;
+  }
+  .small-container {
+    @apply max-w-[600px] mx-auto;
+  }
+  .label-text {
+    @apply text-gray-700 font-medium;
+  }
 }
