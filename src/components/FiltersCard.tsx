@@ -1,6 +1,32 @@
 import { Card, Label, Select, TextInput, Button } from "flowbite-react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setMake,
+  SearchState,
+  setModel,
+  setMaxYom,
+  setMinYom,
+  setMinMileage,
+  setMinPrice,
+  setMaxMileage,
+  setMaxPrice,
+  setTransmission,
+} from "../store/searchSlice";
 
 export default function FiltersCard() {
+  const {
+    make,
+    model,
+    minYom,
+    maxYom,
+    minPrice,
+    minMileage,
+    maxPrice,
+    maxMileage,
+    transmission,
+  } = useSelector((state: { search: SearchState }) => state.search);
+  const dispatch = useDispatch();
+
   return (
     <Card className="bg-variant border-0">
       <form action="">
@@ -9,8 +35,12 @@ export default function FiltersCard() {
             <div className="mb-2 block">
               <Label htmlFor="make" value="Make" />
             </div>
-            <Select id="make">
-              <option disabled selected>
+            <Select
+              id="make"
+              value={make}
+              onChange={(e) => dispatch(setMake(e.target.value))}
+            >
+              <option disabled value="">
                 Select a make
               </option>
               <option value="volvo">Volvo</option>
@@ -23,8 +53,12 @@ export default function FiltersCard() {
             <div className="mb-2 block">
               <Label htmlFor="model" value="Model" />
             </div>
-            <Select id="model">
-              <option disabled selected>
+            <Select
+              id="model"
+              value={model}
+              onChange={(e) => dispatch(setModel(e.target.value))}
+            >
+              <option disabled value="">
                 Select a model
               </option>
               <option value="volvo">Volvo</option>
@@ -46,14 +80,21 @@ export default function FiltersCard() {
                 placeholder="Min YOM"
                 className="sm:w-56"
                 min={1970}
+                max={new Date().getFullYear()}
+                value={minYom}
+                onChange={(e) => dispatch(setMinYom(e.target.value))}
               />
             </div>
             <div className="w-full sm:w-auto">
               <TextInput
-                id="min_yom"
+                id="max_yom"
                 type="number"
-                placeholder="Min YOM"
+                placeholder="Max YOM"
                 className="sm:w-56"
+                min={1970}
+                max={new Date().getFullYear()}
+                value={maxYom}
+                onChange={(e) => dispatch(setMaxYom(e.target.value))}
               />
             </div>
           </div>
@@ -70,6 +111,8 @@ export default function FiltersCard() {
               placeholder="Min Price"
               className="sm:w-56"
               min={0}
+              value={minPrice}
+              onChange={(e) => dispatch(setMinPrice(e.target.value))}
             />
           </div>
           <div className="w-full sm:w-auto">
@@ -78,6 +121,9 @@ export default function FiltersCard() {
               type="number"
               placeholder="Max Price"
               className="sm:w-56"
+              min={0}
+              value={maxPrice}
+              onChange={(e) => dispatch(setMaxPrice(e.target.value))}
             />
           </div>
         </div>
@@ -93,6 +139,8 @@ export default function FiltersCard() {
                 placeholder="Min Mileage"
                 className="sm:w-56"
                 min={0}
+                value={minMileage}
+                onChange={(e) => dispatch(setMinMileage(e.target.value))}
               />
             </div>
             <div className="w-full sm:w-auto">
@@ -101,6 +149,8 @@ export default function FiltersCard() {
                 type="number"
                 placeholder="Max Mileage"
                 className="sm:w-56"
+                value={maxMileage}
+                onChange={(e) => dispatch(setMaxMileage(e.target.value))}
               />
             </div>
           </div>
@@ -109,7 +159,11 @@ export default function FiltersCard() {
           <div className="mb-2 block">
             <Label htmlFor="transmission" value="Transmission" />
           </div>
-          <Select id="transmission">
+          <Select
+            id="transmission"
+            value={transmission}
+            onChange={(e) => dispatch(setTransmission(e.target.value))}
+          >
             <option value="automatic">Automatic</option>
             <option value="manual">Manual</option>
           </Select>
