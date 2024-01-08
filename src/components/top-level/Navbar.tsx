@@ -24,7 +24,7 @@ export default function Nav() {
     },
     {
       name: "Our cars",
-      href: "#",
+      href: "/vehicles",
     },
     {
       name: "About",

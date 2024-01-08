@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
+import Root from './Root';
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Root from './Root';
+import Vehicles from "./pages/Vehicles";
 
 export default createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export default createBrowserRouter([
         path: "about",
         element: <About />,
       },
+      {
+        path: "vehicles",
+        element: <Vehicles />,
+      }
     ],
   },
 ]);
