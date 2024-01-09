@@ -25,6 +25,7 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setMake: (state, action) => {
+      if (state.model) state.model = "";
       state.make = action.payload;
     },
     setModel: (state, action) => {

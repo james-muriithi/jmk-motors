@@ -1,5 +1,6 @@
 import { Card, Label, Select, TextInput, Button } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   setMake,
   SearchState,
@@ -12,6 +13,8 @@ import {
   setMaxPrice,
   setTransmission,
 } from "../store/searchSlice";
+import { carMakes, carTransmissions } from "../data";
+import SelectData from "../types/SelectData";
 
 export default function FiltersCard() {
   const {
@@ -27,6 +30,15 @@ export default function FiltersCard() {
   } = useSelector((state: { search: SearchState }) => state.search);
   const dispatch = useDispatch();
 
+  let models: SelectData[] = [];
+
+  if (make) {
+    const makeData = carMakes.find((item) => item.value === make);
+    if (makeData) {
+      models = makeData.models;
+    }
+  }
+
   return (
     <Card className="bg-variant border-0">
       <form action="">
@@ -40,13 +52,12 @@ export default function FiltersCard() {
               value={make}
               onChange={(e) => dispatch(setMake(e.target.value))}
             >
-              <option disabled value="">
-                Select a make
-              </option>
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
+              <option value="">Select a make</option>
+              {carMakes.map(({ value, label }) => (
+                <option value={value} key={value}>
+                  {label}
+                </option>
+              ))}
             </Select>
           </div>
           <div>
@@ -61,10 +72,11 @@ export default function FiltersCard() {
               <option disabled value="">
                 Select a model
               </option>
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
+              {models.map(({ value, label }) => (
+                <option value={value} key={value}>
+                  {label}
+                </option>
+              ))}
             </Select>
           </div>
         </div>
@@ -72,25 +84,25 @@ export default function FiltersCard() {
           <div className="mb-2 block">
             <Label value="Year of manufacture" />
           </div>
-          <div className="flex flex-wrap  gap-5">
-            <div className="w-full sm:w-auto">
+          <div className="flex flex-wrap sm:flex-nowrap gap-5">
+            <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="min_yom"
                 type="number"
                 placeholder="Min YOM"
-                className="sm:w-56"
+                className="w-full"
                 min={1970}
                 max={new Date().getFullYear()}
                 value={minYom}
                 onChange={(e) => dispatch(setMinYom(e.target.value))}
               />
             </div>
-            <div className="w-full sm:w-auto">
+            <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="max_yom"
                 type="number"
                 placeholder="Max YOM"
-                className="sm:w-56"
+                className="w-full"
                 min={1970}
                 max={new Date().getFullYear()}
                 value={maxYom}
@@ -103,24 +115,24 @@ export default function FiltersCard() {
         <div className="mb-2 block">
           <Label value="Price" />
         </div>
-        <div className="flex flex-wrap  gap-5">
-          <div className="w-full sm:w-auto">
+        <div className="flex flex-wrap sm:flex-nowrap gap-5">
+          <div className="w-full sm:max-w-[224px]">
             <TextInput
               id="min_price"
               type="number"
               placeholder="Min Price"
-              className="sm:w-56"
+              className="w-full"
               min={0}
               value={minPrice}
               onChange={(e) => dispatch(setMinPrice(e.target.value))}
             />
           </div>
-          <div className="w-full sm:w-auto">
+          <div className="w-full sm:max-w-[224px]">
             <TextInput
               id="max_price"
               type="number"
               placeholder="Max Price"
-              className="sm:w-56"
+              className="w-full"
               min={0}
               value={maxPrice}
               onChange={(e) => dispatch(setMaxPrice(e.target.value))}
@@ -131,24 +143,24 @@ export default function FiltersCard() {
           <div className="mb-2 block">
             <Label value="Mileage" />
           </div>
-          <div className="flex flex-wrap gap-5">
-            <div className="w-full sm:w-auto">
+          <div className="flex flex-wrap sm:flex-nowrap gap-5">
+            <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="min_mileage"
                 type="number"
                 placeholder="Min Mileage"
-                className="sm:w-56"
+                className="w-full"
                 min={0}
                 value={minMileage}
                 onChange={(e) => dispatch(setMinMileage(e.target.value))}
               />
             </div>
-            <div className="w-full sm:w-auto">
+            <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="max_mileage"
                 type="number"
                 placeholder="Max Mileage"
-                className="sm:w-56"
+                className="w-full"
                 value={maxMileage}
                 onChange={(e) => dispatch(setMaxMileage(e.target.value))}
               />
@@ -164,8 +176,11 @@ export default function FiltersCard() {
             value={transmission}
             onChange={(e) => dispatch(setTransmission(e.target.value))}
           >
-            <option value="automatic">Automatic</option>
-            <option value="manual">Manual</option>
+            {carTransmissions.map(({ value, label }) => (
+              <option value={value} key={value}>
+                {label}
+              </option>
+            ))}
           </Select>
         </div>
         <div className="mt-9">
