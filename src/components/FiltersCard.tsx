@@ -184,7 +184,7 @@ export default function FiltersCard() {
           </Select>
         </div>
         <div className="mt-9">
-          <Button className="btn btn-primary w-full" color="gray">
+          <Button className="btn w-full" color="light">
             Search
           </Button>
         </div>
