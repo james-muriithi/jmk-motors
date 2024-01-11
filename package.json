@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@iconify-json/ic": "^1.1.17",
+    "@iconify-json/ph": "^1.1.10",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@types/react": "^18.2.37",

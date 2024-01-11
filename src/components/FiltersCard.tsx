@@ -1,5 +1,6 @@
 import { Card, Label, Select, TextInput, Button } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
+import { useSearchParams, useLocation } from 'react-router-dom';
 
 import {
   setMake,
@@ -15,8 +16,9 @@ import {
 } from "../store/searchSlice";
 import { carMakes, carTransmissions } from "../data";
 import SelectData from "../types/SelectData";
+import { useEffect } from "react";
 
-export default function FiltersCard() {
+export default function FiltersCard({ className = "" }) {
   const {
     make,
     model,
@@ -39,9 +41,52 @@ export default function FiltersCard() {
     }
   }
 
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const searchMake = searchParams.get("make");
+    const searchModel = searchParams.get("model");
+    const searchMinYom = searchParams.get("min_yom");
+    const searchMaxYom = searchParams.get("max_yom");
+    const searchMinPrice = searchParams.get("min_price");
+    const searchMaxPrice = searchParams.get("max_price");
+    const searchMinMileage = searchParams.get("min_mileage");
+    const searchMaxMileage = searchParams.get("max_mileage");
+    const searchTransmission = searchParams.get("transmission");
+
+    if (searchMake && make !== searchMake) {
+      dispatch(setMake(searchMake));
+    }
+    if (searchModel && model !== searchModel) {
+      dispatch(setModel(searchModel));
+    }
+    if (searchMinYom && minYom !== Number(searchMinYom)) {
+      dispatch(setMinYom(searchMinYom));
+    }
+    if (searchMaxYom && maxYom !== Number(searchMaxYom)) {
+      dispatch(setMaxYom(searchMaxYom));
+    }
+    if (searchMinPrice && minPrice !== Number(searchMinPrice)) {
+      dispatch(setMinPrice(searchMinPrice));
+    }
+    if (searchMaxPrice && maxPrice !== Number(searchMaxPrice)) {
+      dispatch(setMaxPrice(searchMaxPrice));
+    }
+    if (searchMinMileage && minMileage !== Number(searchMinMileage)) {
+      dispatch(setMinMileage(searchMinMileage));
+    }
+    if (searchMaxMileage && maxMileage !== Number(searchMaxMileage)) {
+      dispatch(setMaxMileage(searchMaxMileage));
+    }
+    if (searchTransmission && transmission !== searchTransmission) {
+      dispatch(setTransmission(searchTransmission));
+    }
+  }, [location]);
+
   return (
-    <Card className="bg-variant border-0">
-      <form action="">
+    <Card className={`bg-variant border-0 ${className}`}>
+      <form action="/vehicles">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
             <div className="mb-2 block">
@@ -49,6 +94,7 @@ export default function FiltersCard() {
             </div>
             <Select
               id="make"
+              name="make"
               value={make}
               onChange={(e) => dispatch(setMake(e.target.value))}
             >
@@ -66,6 +112,7 @@ export default function FiltersCard() {
             </div>
             <Select
               id="model"
+              name="model"
               value={model}
               onChange={(e) => dispatch(setModel(e.target.value))}
             >
@@ -88,6 +135,7 @@ export default function FiltersCard() {
             <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="min_yom"
+                name="min_yom"
                 type="number"
                 placeholder="Min YOM"
                 className="w-full"
@@ -100,6 +148,7 @@ export default function FiltersCard() {
             <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="max_yom"
+                name="max_yom"
                 type="number"
                 placeholder="Max YOM"
                 className="w-full"
@@ -119,6 +168,7 @@ export default function FiltersCard() {
           <div className="w-full sm:max-w-[224px]">
             <TextInput
               id="min_price"
+              name="min_price"
               type="number"
               placeholder="Min Price"
               className="w-full"
@@ -130,6 +180,7 @@ export default function FiltersCard() {
           <div className="w-full sm:max-w-[224px]">
             <TextInput
               id="max_price"
+              name="max_price"
               type="number"
               placeholder="Max Price"
               className="w-full"
@@ -147,6 +198,7 @@ export default function FiltersCard() {
             <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="min_mileage"
+                name="min_mileage"
                 type="number"
                 placeholder="Min Mileage"
                 className="w-full"
@@ -158,6 +210,7 @@ export default function FiltersCard() {
             <div className="w-full sm:max-w-[224px]">
               <TextInput
                 id="max_mileage"
+                name="max_mileage"
                 type="number"
                 placeholder="Max Mileage"
                 className="w-full"
@@ -173,6 +226,7 @@ export default function FiltersCard() {
           </div>
           <Select
             id="transmission"
+            name="transmission"
             value={transmission}
             onChange={(e) => dispatch(setTransmission(e.target.value))}
           >
@@ -184,7 +238,7 @@ export default function FiltersCard() {
           </Select>
         </div>
         <div className="mt-9">
-          <Button className="btn w-full" color="light">
+          <Button className="btn w-full" color="light" type="submit">
             Search
           </Button>
         </div>

@@ -7,4 +7,5 @@ export {}
 declare global {
   const IconIcBaselineFavorite: typeof import('~icons/ic/baseline-favorite.jsx')['default']
   const IconIcOutlineFavoriteBorder: typeof import('~icons/ic/outline-favorite-border.jsx')['default']
+  const IconPhFunnelFill: typeof import('~icons/ph/funnel-fill.jsx')['default']
 }
