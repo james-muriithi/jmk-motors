@@ -53,7 +53,7 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             </Badge>
           </div>
         </div>
-        <div className="mt-4 px-5">
+        <div className="mt-4 px-5 mb-4">
           <p className="line-clamp-3 text-gray-300 lg:line-clamp-4">
             {vehicle.description}
           </p>

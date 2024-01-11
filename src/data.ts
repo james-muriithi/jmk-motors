@@ -1,4 +1,5 @@
 import SelectData from "./types/SelectData";
+import { Vehicle } from "./types/Vehicle";
 
 interface CarMake extends SelectData {
   models: SelectData[];
@@ -202,5 +203,53 @@ export const carTransmissions: SelectData[] = [
     id: "manual",
     value: "manual",
     label: "Manual",
+  },
+];
+
+export const vehicles: Vehicle[] = [
+  {
+    id: 1,
+    thumbnail:
+      "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20240109-WA0177.jpg",
+    name: "Audi A3 Sedan 1.4T 'Typ 8V'",
+    year_of_manufacture: 2015,
+    mileage: 72000,
+    price: 1800000,
+    currency: "KES",
+    is_favorite: false,
+    is_available: true,
+    is_locally_used: true,
+    description:
+      "This is the cleanest Audi A3 we have for you running a 1.4L Turbocharged Fuel Stratified Injection doing 150hp and 250Nm of torque. It features a MacPherson strut suspension in the front and Multi-link rear suspension in the rear with models with less than 148hp having torsion bar suspension. On the interior, it has fabric seats, a 5.8-inch display, and a 6-speaker stereo system. It also has a 7-speed S-Tronic dual-clutch transmission.",
+  },
+  {
+    id: 2,
+    thumbnail:
+      "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20230929-WA0224.jpg",
+    name: "Audi A3",
+    year_of_manufacture: 2015,
+    mileage: 95000,
+    price: 1850000,
+    currency: "KES",
+    is_favorite: false,
+    is_available: true,
+    is_locally_used: true,
+    description:
+      "Leather seats, dual zone climate controls, fog lights, parking sensors, Multifunctional steering wheel.",
+  },
+  {
+    id: 3,
+    thumbnail:
+      "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20231031-WA0155.jpg",
+    name: "Audi A3 1.4T",
+    year_of_manufacture: 2016,
+    mileage: 70487,
+    price: 2300000,
+    currency: "KES",
+    is_favorite: false,
+    is_available: true,
+    is_locally_used: true,
+    description:
+      "This A3 has a 1400cc engine variant that is quite strong compared to the 1200cc variant. It has no lag and accelerates better. The interior of this Audi A3 is fitted with fabric seats, and Audi MMI infotainment system, dual zone climate controls, and a multifunctional steering wheel.",
   },
 ];
