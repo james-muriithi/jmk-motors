@@ -6,6 +6,9 @@
 export {}
 declare global {
   const IconIcBaselineFavorite: typeof import('~icons/ic/baseline-favorite.jsx')['default']
+  const IconIcOutlineClose: typeof import('~icons/ic/outline-close.jsx')['default']
   const IconIcOutlineFavoriteBorder: typeof import('~icons/ic/outline-favorite-border.jsx')['default']
+  const IconMaterialSymbolsChevronRight: typeof import('~icons/material-symbols/chevron-right.jsx')['default']
+  const IconMaterialSymbolsHome: typeof import('~icons/material-symbols/home.jsx')['default']
   const IconPhFunnelFill: typeof import('~icons/ph/funnel-fill.jsx')['default']
 }
