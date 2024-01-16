@@ -19,6 +19,7 @@
     "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
+    "@iconify-json/bi": "^1.1.22",
     "@iconify-json/ic": "^1.1.17",
     "@iconify-json/material-symbols": "^1.1.70",
     "@iconify-json/ph": "^1.1.10",

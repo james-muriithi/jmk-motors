@@ -209,6 +209,7 @@ export const carTransmissions: SelectData[] = [
 export const vehicles: Vehicle[] = [
   {
     id: 1,
+    slug: "audi-a3-sedan-1-4t-typ-8v",
     thumbnail:
       "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20240109-WA0177.jpg",
     name: "Audi A3 Sedan 1.4T 'Typ 8V'",
@@ -221,9 +222,33 @@ export const vehicles: Vehicle[] = [
     is_locally_used: true,
     description:
       "This is the cleanest Audi A3 we have for you running a 1.4L Turbocharged Fuel Stratified Injection doing 150hp and 250Nm of torque. It features a MacPherson strut suspension in the front and Multi-link rear suspension in the rear with models with less than 148hp having torsion bar suspension. On the interior, it has fabric seats, a 5.8-inch display, and a 6-speaker stereo system. It also has a 7-speed S-Tronic dual-clutch transmission.",
+    fuel_consumption: {
+      fuel_unit: "Litre",
+      urban_consumption: 14,
+      fuel_tank_capacity: null,
+      highway_consumption: 16,
+    },
+    annual_insurance: 72000,
+    vehicle_images: [
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0177.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0178.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0176.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0173.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0172.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0180.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0171.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0175.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0179.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0174.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0169.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0168.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0170.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0181.jpg",
+    ],
   },
   {
     id: 2,
+    slug: "audi-a3",
     thumbnail:
       "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20230929-WA0224.jpg",
     name: "Audi A3",
@@ -236,9 +261,33 @@ export const vehicles: Vehicle[] = [
     is_locally_used: true,
     description:
       "Leather seats, dual zone climate controls, fog lights, parking sensors, Multifunctional steering wheel.",
+    fuel_consumption: {
+      fuel_unit: "Litre",
+      urban_consumption: 14,
+      fuel_tank_capacity: null,
+      highway_consumption: 16,
+    },
+    annual_insurance: 72000,
+    vehicle_images: [
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0177.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0178.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0176.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0173.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0172.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0180.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0171.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0175.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0179.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0174.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0169.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0168.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0170.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0181.jpg",
+    ],
   },
   {
     id: 3,
+    slug: "audi-a3-1-4t",
     thumbnail:
       "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20231031-WA0155.jpg",
     name: "Audi A3 1.4T",
@@ -251,5 +300,28 @@ export const vehicles: Vehicle[] = [
     is_locally_used: true,
     description:
       "This A3 has a 1400cc engine variant that is quite strong compared to the 1200cc variant. It has no lag and accelerates better. The interior of this Audi A3 is fitted with fabric seats, and Audi MMI infotainment system, dual zone climate controls, and a multifunctional steering wheel.",
+    fuel_consumption: {
+      fuel_unit: "Litre",
+      urban_consumption: 14,
+      fuel_tank_capacity: null,
+      highway_consumption: 16,
+    },
+    annual_insurance: 72000,
+    vehicle_images: [
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0177.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0178.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0176.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0173.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0172.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0180.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0171.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0175.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0179.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0174.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0169.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0168.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0170.jpg",
+      "https://dashboard.kaiandkaro.com/media/vehicles/images/IMG-20240109-WA0181.jpg",
+    ],
   },
 ];

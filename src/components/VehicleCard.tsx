@@ -15,7 +15,7 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         >
           {vehicle.year_of_manufacture}
         </Badge>
-        <Link to={`/vehicles/${vehicle.id}`}>
+        <Link to={`/vehicles/${vehicle.slug}`}>
           <img
             className="rounded-t-lg object-cover h-72 w-full"
             src={vehicle.thumbnail}
@@ -35,7 +35,7 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         </Button>
       </div>
       <div className="py-5 mt-2 flex flex-col h-full">
-        <Link to={`/vehicles/${vehicle.id}`} className="px-5">
+        <Link to={`/vehicles/${vehicle.slug}`} className="px-5">
           <h5 className="mb-2 text-2xl font-bold tracking-tight dark:text-white">
             {vehicle.name}
           </h5>
