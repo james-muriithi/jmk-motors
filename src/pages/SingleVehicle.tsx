@@ -47,6 +47,11 @@ export default function SingleVehicle() {
       <div className="grid grid-cols-12 mt-5 gap-x-5 gap-y-14">
         <div className="col-span-12 lg:col-span-6 2xl:col-span-5">
           <VehicleGallery images={vehicleData?.vehicle_images || []} />
+          <div className="mt-2">
+            <p className="font-bold text-lg">
+            {vehicleData.currency} {numberFormat(vehicleData.price)}
+            </p>
+          </div>
           <div className="mt-5">
             <VehicleInfoTable vehicleData={vehicleData} />
           </div>
