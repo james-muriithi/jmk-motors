@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Modal } from "flowbite-react";
 import FiltersCard from "../components/FiltersCard";
-import VehicleCard from "../components/VehicleCard";
+import VehicleCard from "../components/vehicle/VehicleCard";
 import { vehicles } from "../data";
 
 export default function Vehicles() {

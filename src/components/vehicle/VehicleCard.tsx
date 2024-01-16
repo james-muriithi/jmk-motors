@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Badge, Button } from "flowbite-react";
-import { Vehicle } from "../types/Vehicle";
-import { numberFormat } from '../helpers/utils';
+import { Vehicle } from "../../types/Vehicle";
+import { numberFormat } from '../../helpers/utils';
 
 export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const isFavorite = vehicle.is_favorite;

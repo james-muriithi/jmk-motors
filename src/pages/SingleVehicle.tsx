@@ -4,6 +4,9 @@ import Drawer from "../components/top-level/Drawer";
 import { vehicles } from "../data";
 import { useNavigate, useParams } from "react-router-dom";
 import { numberFormat } from "../helpers/utils";
+import VehicleGallery from "../components/vehicle/vehicleGallery";
+import VehicleInfoTable from "../components/vehicle/VehicleInfoTable";
+import VehicleCard from "../components/vehicle/VehicleCard";
 
 export default function SingleVehicle() {
   const [openSpecificationsDrawer, setOpenSpecificationsDrawer] =
@@ -27,11 +30,9 @@ export default function SingleVehicle() {
     return null;
   }
 
-  const accordionTheme = {
-    content: {
-      base: "bg-dark hidden",
-    },
-  };
+  const similarVehicles = vehicles
+    .filter(({ slug }) => slug !== vehicleSlug)
+    .slice(0, 8);
 
   return (
     <section className="px-3 md:px-5 py-5 max-w-[1600px] mx-auto">
@@ -43,9 +44,14 @@ export default function SingleVehicle() {
         <Breadcrumb.Item>{vehicleData?.name}</Breadcrumb.Item>
       </Breadcrumb>
 
-      <div className="grid grid-cols-12 mt-5 gap-y-4">
-        <div className="col-span-12 md:col-span-4"></div>
-        <div className="col-span-12 md:col-span-8">
+      <div className="grid grid-cols-12 mt-5 gap-x-5 gap-y-14">
+        <div className="col-span-12 lg:col-span-6 2xl:col-span-5">
+          <VehicleGallery images={vehicleData?.vehicle_images || []} />
+          <div className="mt-5">
+            <VehicleInfoTable vehicleData={vehicleData} />
+          </div>
+        </div>
+        <div className="col-span-12 lg:col-span-6 2xl:col-span-7">
           <h3 className="font-bold text-3xl ">{vehicleData?.name}</h3>
           <p className="mt-3 text-gray-300 text-lg">
             {vehicleData?.description}
@@ -72,6 +78,23 @@ export default function SingleVehicle() {
           </div>
         </div>
       </div>
+
+      <div className="mt-20">
+        <h3 className="font-bold text-3xl text-center">Similar vehicles</h3>
+        <p className="text-center mt-2 text-lg text-gray-400">
+          people who viewed {vehicleData?.name} also viewed these vehicles
+        </p>
+        <div className="grid grid-cols-12 mt-8 gap-x-5 gap-y-14">
+          {similarVehicles.map((vehicle) => (
+            <div
+              className="col-span-12 sm:col-span-6 lg:col-span-4 2xl:col-span-3"
+              key={vehicle.id}
+            >
+              <VehicleCard vehicle={vehicle} />
+            </div>
+          ))}
+        </div>
+      </div>
       <Drawer
         openDrawer={openSpecificationsDrawer}
         onClose={() => setOpenSpecificationsDrawer(false)}
@@ -80,7 +103,7 @@ export default function SingleVehicle() {
           <h6 className="text-xl font-bold pb-4 border-none">
             {vehicleData?.name}
           </h6>
-          <Accordion className="border-none" theme={accordionTheme}>
+          <Accordion className="border-none">
             <Accordion.Panel>
               <Accordion.Title>Comfort features</Accordion.Title>
               <Accordion.Content></Accordion.Content>
@@ -130,11 +153,11 @@ export default function SingleVehicle() {
                     {vehicleData?.fuel_consumption?.fuel_unit}
                   </p>
                 )}
-                {vehicleData.fuel_consumption?.city_consumption && (
+                {vehicleData.fuel_consumption?.urban_consumption && (
                   <p className="mt-2">
-                  Urban: {vehicleData?.fuel_consumption?.urban_consumption} /{" "}
-                  {vehicleData?.fuel_consumption?.fuel_unit}
-                </p>
+                    Urban: {vehicleData?.fuel_consumption?.urban_consumption} /{" "}
+                    {vehicleData?.fuel_consumption?.fuel_unit}
+                  </p>
                 )}
               </div>
             </div>

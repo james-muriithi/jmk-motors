@@ -19,4 +19,13 @@ export interface Vehicle {
     fuel_tank_capacity?: number | null;
     highway_consumption: number;
   };
+  engine_specifications?: {
+    torque: number;
+    cylinders?: number;
+    fuel_type: string;
+    engine_size: number;
+    horse_power: number;
+    acceleration: number;
+    transmission: string;
+  };
 }
