@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import { Badge, Button } from "flowbite-react";
+import { useSelector, useDispatch } from "react-redux";
 import { Vehicle } from "../../types/Vehicle";
 import { numberFormat } from '../../helpers/utils';
+import { FavoriteState } from "../../store/favoriteSlice";
 
 export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
-  const isFavorite = vehicle.is_favorite;
+
+  const { favorites } = useSelector((state: { favorite: FavoriteState }) => state.favorite);
+  const dispatch = useDispatch();
+
+  const isFavorite = favorites.includes(vehicle.slug);
 
   return (
     <div className="w-full rounded-lg dark:bg-gray-800 dark:border-gray-800 h-full flex flex-col">
@@ -26,9 +32,15 @@ export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
           className="absolute right-2 top-2 rounded-full bg-white text-dark w-10 h-10"
           size="sm"
           color=""
+          onClick={() => {
+            dispatch({
+              type: isFavorite ? "favorite/removeFavorite" : "favorite/addFavorite",
+              payload: vehicle.slug,
+            });
+          }}
         >
           {isFavorite ? (
-            <IconIcBaselineFavorite className="text-lg" />
+            <IconIcBaselineFavorite className="text-lg text-violet-500" />
           ) : (
             <IconIcOutlineFavoriteBorder className="text-lg" />
           )}
