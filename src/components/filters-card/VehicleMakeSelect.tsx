@@ -20,7 +20,7 @@ export default function VehicleMakeSelect() {
 
   useEffect(() => {
     dispatch(fetchVehicleMakes({ firestore }));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

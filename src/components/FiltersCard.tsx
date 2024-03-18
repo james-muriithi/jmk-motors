@@ -1,6 +1,11 @@
 import { Card, Label, Select, TextInput, Button } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
-import { useSearchParams, useLocation } from "react-router-dom";
+import {
+  useSearchParams,
+  useLocation,
+  useNavigate,
+  createSearchParams,
+} from "react-router-dom";
 
 import {
   setMake,
@@ -14,10 +19,10 @@ import {
   setMaxPrice,
   setTransmission,
 } from "../store/searchSlice";
-import { carMakes, carTransmissions } from "../data";
-import SelectData from "../types/SelectData";
-import { useEffect } from "react";
+import { carTransmissions } from "../data";
+import { FormEvent, useEffect } from "react";
 import VehicleMakeSelect from "./filters-card/VehicleMakeSelect";
+import VehicleModelSelect from "./filters-card/VehicleModelSelect";
 
 export default function FiltersCard({ className = "" }) {
   const {
@@ -33,17 +38,30 @@ export default function FiltersCard({ className = "" }) {
   } = useSelector((state: { search: SearchState }) => state.search);
   const dispatch = useDispatch();
 
-  let models: SelectData[] = [];
-
-  if (make) {
-    const makeData = carMakes.find((item) => item.value === make);
-    if (makeData) {
-      models = makeData.models;
-    }
-  }
-
   const location = useLocation();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const query:Partial<SearchState> = {
+      make: make || "",
+      model: model || "",
+    };
+    if(minYom) query.minYom = minYom;
+    if(maxYom) query.maxYom = maxYom;
+    if(minPrice) query.minPrice = minPrice;
+    if(maxPrice) query.maxPrice = maxPrice;
+    if(minMileage) query.minMileage = minMileage;
+    if(maxMileage) query.maxMileage = maxMileage;
+    if(transmission) query.transmission = transmission;
+    
+
+    navigate({
+      pathname: "/vehicles",
+      search: createSearchParams(query as {}).toString(),
+    });
+  };
 
   useEffect(() => {
     const searchMake = searchParams.get("make");
@@ -87,29 +105,10 @@ export default function FiltersCard({ className = "" }) {
 
   return (
     <Card className={`bg-variant border-0 ${className}`}>
-      <form action="/vehicles">
+      <form action="/vehicles" onSubmit={(e) => onSubmit(e)}>
         <div className="grid sm:grid-cols-2 gap-5">
           <VehicleMakeSelect />
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="model" value="Model" />
-            </div>
-            <Select
-              id="model"
-              name="model"
-              value={model}
-              onChange={(e) => dispatch(setModel(e.target.value))}
-            >
-              <option disabled value="">
-                Select a model
-              </option>
-              {models.map(({ value, label }) => (
-                <option value={value} key={value}>
-                  {label}
-                </option>
-              ))}
-            </Select>
-          </div>
+          <VehicleModelSelect />
         </div>
         <div className="mt-6">
           <div className="mb-2 block">

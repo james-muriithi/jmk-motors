@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { carMakes } from "../data";
+// import { carMakes } from '../data';
+import { fetchVehicleMakes } from "./vehicleMakeSlice"
 
 export interface SearchState {
   make?: string;
@@ -27,17 +28,9 @@ const searchSlice = createSlice({
   reducers: {
     setMake: (state, action) => {
       if (state.model) state.model = "";
-      if (!carMakes.find(({ value }) => value === action.payload)) return;
       state.make = action.payload;
     },
     setModel: (state, action) => {
-      if (!state.make) return;
-      const makeData = carMakes.find(({ value }) => value === state.make);
-      if (
-        !makeData ||
-        !makeData.models.find(({ value }) => value === action.payload)
-      )
-        return;
       state.model = action.payload;
     },
     setMinYom: (state, action) => {

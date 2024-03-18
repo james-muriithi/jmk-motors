@@ -1,4 +1,4 @@
-import type { Timestamp } from "firebase/firestore"
+import type { Timestamp } from "firebase/firestore";
 export interface Vehicle {
   id: number;
   slug: string;
@@ -35,4 +35,10 @@ export interface CarMake {
   id: string | number;
   label: string;
   createdAt?: Timestamp;
+}
+
+export interface CarModel {
+  id: string | number;
+  label: string;
+  make: string;
 }
