@@ -1,6 +1,6 @@
 import { Card, Label, Select, TextInput, Button } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from "react-router-dom";
 
 import {
   setMake,
