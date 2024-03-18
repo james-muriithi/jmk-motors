@@ -14,7 +14,7 @@ export interface SearchState {
 }
 
 const initialState: SearchState = {
-  make: "volvo",
+  make: "",
   model: "",
   minPrice: 0,
   minMileage: 0,

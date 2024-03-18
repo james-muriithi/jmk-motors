@@ -17,6 +17,7 @@ import {
 import { carMakes, carTransmissions } from "../data";
 import SelectData from "../types/SelectData";
 import { useEffect } from "react";
+import VehicleMakeSelect from "./filters-card/VehicleMakeSelect";
 
 export default function FiltersCard({ className = "" }) {
   const {
@@ -88,24 +89,7 @@ export default function FiltersCard({ className = "" }) {
     <Card className={`bg-variant border-0 ${className}`}>
       <form action="/vehicles">
         <div className="grid sm:grid-cols-2 gap-5">
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="make" value="Make" />
-            </div>
-            <Select
-              id="make"
-              name="make"
-              value={make}
-              onChange={(e) => dispatch(setMake(e.target.value))}
-            >
-              <option value="">Select a make</option>
-              {carMakes.map(({ value, label }) => (
-                <option value={value} key={value}>
-                  {label}
-                </option>
-              ))}
-            </Select>
-          </div>
+          <VehicleMakeSelect />
           <div>
             <div className="mb-2 block">
               <Label htmlFor="model" value="Model" />
