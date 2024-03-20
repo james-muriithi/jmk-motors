@@ -1,22 +1,17 @@
-import SelectData from "./types/SelectData";
+import { doc, setDoc } from "firebase/firestore";
+import type { Firestore } from "firebase/firestore";
 import { Vehicle } from "./types/Vehicle";
 
-export const carTransmissions: SelectData[] = [
-  {
-    id: "automatic",
-    value: "automatic",
-    label: "Automatic",
-  },
-  {
-    id: "manual",
-    value: "manual",
-    label: "Manual",
-  },
-];
+export const addVehicles = (firestore: Firestore) => {
+  vehicles.map(async (vehicle) => {
+    await setDoc(doc(firestore, "vehicles", vehicle.slug), {
+      ...vehicle,
+    });
+  });
+};
 
-export const vehicles: Vehicle[] = [
+const vehicles: Vehicle[] = [
   {
-    id: 1,
     slug: "audi-a3-sedan-1-4t-typ-8v",
     thumbnail:
       "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20240109-WA0177.jpg",
@@ -28,6 +23,8 @@ export const vehicles: Vehicle[] = [
     is_favorite: false,
     is_available: true,
     is_locally_used: true,
+    make: "a3",
+    model: "audi",
     description:
       "This is the cleanest Audi A3 we have for you running a 1.4L Turbocharged Fuel Stratified Injection doing 150hp and 250Nm of torque. It features a MacPherson strut suspension in the front and Multi-link rear suspension in the rear with models with less than 148hp having torsion bar suspension. On the interior, it has fabric seats, a 5.8-inch display, and a 6-speaker stereo system. It also has a 7-speed S-Tronic dual-clutch transmission.",
     fuel_consumption: {
@@ -64,7 +61,6 @@ export const vehicles: Vehicle[] = [
     },
   },
   {
-    id: 2,
     slug: "audi-a3",
     thumbnail:
       "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20230929-WA0224.jpg",
@@ -73,6 +69,8 @@ export const vehicles: Vehicle[] = [
     mileage: 95000,
     price: 1850000,
     currency: "KES",
+    make: "a3",
+    model: "audi",
     is_favorite: false,
     is_available: true,
     is_locally_used: true,
@@ -113,7 +111,6 @@ export const vehicles: Vehicle[] = [
     },
   },
   {
-    id: 3,
     slug: "audi-a3-1-4t",
     thumbnail:
       "https://dashboard.kaiandkaro.com/media/vehicles/thumbnails/IMG-20231031-WA0155.jpg",
@@ -121,6 +118,8 @@ export const vehicles: Vehicle[] = [
     year_of_manufacture: 2016,
     mileage: 70487,
     price: 2300000,
+    make: "a3",
+    model: "audi",
     currency: "KES",
     is_favorite: false,
     is_available: true,

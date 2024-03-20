@@ -10,7 +10,6 @@ export const fetchVehicleMakes = createAsyncThunk(
   async ({ firestore }: { firestore: Firestore }) => {
     const makesCollectionRef = collection(firestore, "makes");
     const makeDocs = await getDocs(makesCollectionRef);
-    console.log(makeDocs.docs.map(firestoreDocToJson));
     return makeDocs.docs.map(firestoreDocToJson) as CarMake[];
   }
 );

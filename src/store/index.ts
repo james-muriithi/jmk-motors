@@ -3,6 +3,7 @@ import searchReduce from "./searchSlice";
 import favoriteReducer from "./favoriteSlice";
 import vehicleMakesReducer from "./vehicleMakeSlice";
 import vehicleModelsReducer from "./vehicleModelSlice";
+import vehiclesReducer from "./vehicleSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,7 +11,8 @@ export const store = configureStore({
     favorite: favoriteReducer,
     vehicleMakes: vehicleMakesReducer,
     vehicleModels: vehicleModelsReducer,
+    vehicles: vehiclesReducer,
   },
 });
 
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;

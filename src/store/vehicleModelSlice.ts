@@ -43,7 +43,6 @@ const vehicleModelSlice = createSlice({
       .addCase(fetchVehicleModels.fulfilled, (state, action) => {
         state.loading = false;
         state.models = action.payload || [];
-        console.log(state.models);
       })
       .addCase(fetchVehicleModels.rejected, (state) => {
         state.loading = false;
