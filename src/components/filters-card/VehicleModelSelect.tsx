@@ -33,7 +33,7 @@ export default function VehicleModelSelect() {
         value={model}
         onChange={(e) => dispatch(setModel(e.target.value))}
       >
-        <option disabled value="">
+        <option value="">
           Select a model
         </option>
         {models.map(({ id, label }) => (

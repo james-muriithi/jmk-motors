@@ -5,7 +5,7 @@ import FiltersCard from "../components/FiltersCard";
 import VehicleCard from "../components/vehicle/VehicleCard";
 import { fetchVehicles, VehicleState } from "../store/vehicleSlice";
 import { useFirestore } from "reactfire";
-import { AppDispatch } from "../store";
+import { AppDispatch } from "../store"; 
 import { SearchState } from "../store/searchSlice";
 import { useLocation } from "react-router-dom";
 
