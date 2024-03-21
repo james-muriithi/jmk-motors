@@ -25,6 +25,10 @@ export default function Vehicles() {
 
   useEffect(() => {
     dispatch(fetchVehicles({ firestore, make, model }));
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchVehicles({ firestore, make, model }));
   }, [location]);
 
   return (

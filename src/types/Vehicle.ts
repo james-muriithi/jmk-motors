@@ -31,6 +31,7 @@ export interface Vehicle {
     acceleration: number;
     transmission: string;
   };
+  created_at: Timestamp,
 }
 
 export interface CarMake {
