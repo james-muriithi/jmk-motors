@@ -36,7 +36,7 @@ export default function SingleVehicle() {
 
   const similarVehicles = vehicles
     .filter(({ slug }) => slug !== vehicleSlug)
-    .sort((_, b) => b.price - (vehicleData?.price || 0))
+    .sort((a, b) => a.price - (vehicleData?.price || 0))
     .sort((_, b) => (b.make === vehicleData?.make ? 1 : -1))
     .slice(0, 3);
 
