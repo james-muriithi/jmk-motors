@@ -3,7 +3,6 @@ import { Breadcrumb, Accordion } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Drawer from "../components/top-level/Drawer";
-import { vehicles } from "../data";
 import { useParams } from "react-router-dom";
 import { numberFormat } from "../helpers/utils";
 import VehicleGallery from "../components/vehicle/vehicleGallery";
@@ -20,9 +19,11 @@ export default function SingleVehicle() {
   const dispatch = useDispatch<AppDispatch>();
   const firestore = useFirestore();
 
-  const { vehicle: vehicleData, loading } = useSelector(
-    (state: { vehicles: VehicleState }) => state.vehicles
-  );
+  const {
+    vehicle: vehicleData,
+    loading,
+    vehicles,
+  } = useSelector((state: { vehicles: VehicleState }) => state.vehicles);
 
   const params = useParams();
   const vehicleSlug = params.slug;
@@ -35,7 +36,9 @@ export default function SingleVehicle() {
 
   const similarVehicles = vehicles
     .filter(({ slug }) => slug !== vehicleSlug)
-    .slice(0, 8);
+    .sort((_, b) => b.price - (vehicleData?.price || 0))
+    .sort((_, b) => (b.make === vehicleData?.make ? 1 : -1))
+    .slice(0, 3);
 
   return (
     <section className="px-3 md:px-5 py-5 max-w-[1600px] mx-auto">
