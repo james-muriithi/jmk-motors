@@ -73,7 +73,6 @@ export const fetchVehicles = createAsyncThunk<any, FetchVehiclesParams>(
       vehiclesQuery = query(vehicleCollectionRef, where("make", "==", make));
     }
     const vehicleDocs = await getDocs(vehiclesQuery);
-    console.log(vehicleDocs.docs.length, make, model);
     return vehicleDocs.docs.map(firestoreDocToJson) as unknown as Vehicle[];
   }
 );

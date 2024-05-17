@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { Button, Modal } from "flowbite-react";
 import FiltersCard from "../components/FiltersCard";
 import VehicleCard from "../components/vehicle/VehicleCard";
 import { fetchVehicles, VehicleState } from "../store/vehicleSlice";
 import { useFirestore } from "reactfire";
-import { AppDispatch } from "../store"; 
-import { SearchState } from "../store/searchSlice";
-import { useLocation } from "react-router-dom";
+import { AppDispatch } from "../store";
+import {
+  setMake,
+  setModel,
+  setMaxYom,
+  setMinYom,
+  setMinMileage,
+  setMinPrice,
+  setMaxMileage,
+  setMaxPrice,
+  setTransmission,
+} from "../store/searchSlice";
 
 export default function Vehicles() {
   const [openModal, setOpenModal] = useState(false);
@@ -15,21 +25,55 @@ export default function Vehicles() {
   const dispatch = useDispatch<AppDispatch>();
   const firestore = useFirestore();
 
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
   const { vehicles, loading } = useSelector(
     (state: { vehicles: VehicleState }) => state.vehicles
   );
-  const { make, model } = useSelector(
-    (state: { search: SearchState }) => state.search
-  );
 
   useEffect(() => {
-    dispatch(fetchVehicles({ firestore, make, model }));
-  }, []);
+    const searchMake = searchParams.get("make");
+    const searchModel = searchParams.get("model");
+    const searchMinYom = searchParams.get("min_yom");
+    const searchMaxYom = searchParams.get("max_yom");
+    const searchMinPrice = searchParams.get("min_price");
+    const searchMaxPrice = searchParams.get("max_price");
+    const searchMinMileage = searchParams.get("min_mileage");
+    const searchMaxMileage = searchParams.get("max_mileage");
+    const searchTransmission = searchParams.get("transmission");
 
-  useEffect(() => {
-    dispatch(fetchVehicles({ firestore, make, model }));
-  }, [location]);
+    if (searchMake) {
+      dispatch(setMake(searchMake));
+    }
+    if (searchModel) {
+      dispatch(setModel(searchModel));
+    }
+    if (searchMinYom) {
+      dispatch(setMinYom(searchMinYom));
+    }
+    if (searchMaxYom) {
+      dispatch(setMaxYom(searchMaxYom));
+    }
+    if (searchMinPrice) {
+      dispatch(setMinPrice(searchMinPrice));
+    }
+    if (searchMaxPrice) {
+      dispatch(setMaxPrice(searchMaxPrice));
+    }
+    if (searchMinMileage) {
+      dispatch(setMinMileage(searchMinMileage));
+    }
+    if (searchMaxMileage) {
+      dispatch(setMaxMileage(searchMaxMileage));
+    }
+    if (searchTransmission) {
+      dispatch(setTransmission(searchTransmission));
+    }
+    if (searchMake) {
+      dispatch(
+        fetchVehicles({ firestore, make: searchMake, model: searchModel || "" })
+      );
+    }
+  }, [searchParams]);
 
   return (
     <section className="px-5 py-5 max-w-[1600px] mx-auto">

@@ -1,16 +1,9 @@
 import { Card, Label, Select, TextInput, Button } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  useSearchParams,
-  useLocation,
-  useNavigate,
-  createSearchParams,
-} from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 import {
-  setMake,
   SearchState,
-  setModel,
   setMaxYom,
   setMinYom,
   setMinMileage,
@@ -37,71 +30,27 @@ export default function FiltersCard({ className = "" }) {
     transmission,
   } = useSelector((state: { search: SearchState }) => state.search);
   const dispatch = useDispatch();
-
-  const location = useLocation();
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const query:Partial<SearchState> = {
+    const query: Partial<SearchState> = {
       make: make || "",
       model: model || "",
     };
-    if(minYom) query.minYom = minYom;
-    if(maxYom) query.maxYom = maxYom;
-    if(minPrice) query.minPrice = minPrice;
-    if(maxPrice) query.maxPrice = maxPrice;
-    if(minMileage) query.minMileage = minMileage;
-    if(maxMileage) query.maxMileage = maxMileage;
-    if(transmission) query.transmission = transmission;
-    
+    if (minYom) query.minYom = minYom;
+    if (maxYom) query.maxYom = maxYom;
+    if (minPrice) query.minPrice = minPrice;
+    if (maxPrice) query.maxPrice = maxPrice;
+    if (minMileage) query.minMileage = minMileage;
+    if (maxMileage) query.maxMileage = maxMileage;
+    if (transmission) query.transmission = transmission;
 
     navigate({
       pathname: "/vehicles",
       search: createSearchParams(query as {}).toString(),
     });
   };
-
-  useEffect(() => {
-    const searchMake = searchParams.get("make");
-    const searchModel = searchParams.get("model");
-    const searchMinYom = searchParams.get("min_yom");
-    const searchMaxYom = searchParams.get("max_yom");
-    const searchMinPrice = searchParams.get("min_price");
-    const searchMaxPrice = searchParams.get("max_price");
-    const searchMinMileage = searchParams.get("min_mileage");
-    const searchMaxMileage = searchParams.get("max_mileage");
-    const searchTransmission = searchParams.get("transmission");
-
-    if (searchMake && make !== searchMake) {
-      dispatch(setMake(searchMake));
-    }
-    if (searchModel && model !== searchModel) {
-      dispatch(setModel(searchModel));
-    }
-    if (searchMinYom && minYom !== Number(searchMinYom)) {
-      dispatch(setMinYom(searchMinYom));
-    }
-    if (searchMaxYom && maxYom !== Number(searchMaxYom)) {
-      dispatch(setMaxYom(searchMaxYom));
-    }
-    if (searchMinPrice && minPrice !== Number(searchMinPrice)) {
-      dispatch(setMinPrice(searchMinPrice));
-    }
-    if (searchMaxPrice && maxPrice !== Number(searchMaxPrice)) {
-      dispatch(setMaxPrice(searchMaxPrice));
-    }
-    if (searchMinMileage && minMileage !== Number(searchMinMileage)) {
-      dispatch(setMinMileage(searchMinMileage));
-    }
-    if (searchMaxMileage && maxMileage !== Number(searchMaxMileage)) {
-      dispatch(setMaxMileage(searchMaxMileage));
-    }
-    if (searchTransmission && transmission !== searchTransmission) {
-      dispatch(setTransmission(searchTransmission));
-    }
-  }, [location]);
 
   return (
     <Card className={`bg-variant border-0 ${className}`}>

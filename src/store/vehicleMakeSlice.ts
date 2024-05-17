@@ -1,6 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
 import type { Firestore } from "firebase/firestore";
-import { useFirestore } from "reactfire";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { firestoreDocToJson } from "../utils/firebase";
 import { CarMake } from "../types/Vehicle";

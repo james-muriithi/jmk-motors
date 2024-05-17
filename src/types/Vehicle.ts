@@ -38,6 +38,8 @@ export interface CarMake {
   id: string | number;
   label: string;
   createdAt?: Timestamp;
+  logo: string;
+  isPromoted?: boolean
 }
 
 export interface CarModel {
