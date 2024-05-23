@@ -1,9 +1,0 @@
-.logo-card {
-  @apply bg-gray-800 hover:bg-gray-700 shadow-lg shadow-gray-800/60 hover:shadow-gray-800/90;
-  transition: all 450ms ease-in-out;
-  &:hover {
-    p {
-      @apply text-violet-400;
-    }
-  }
-}

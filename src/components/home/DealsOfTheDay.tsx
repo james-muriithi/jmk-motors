@@ -36,15 +36,15 @@ export default function DealsOfTheDay({ className }: { className: string }) {
 
   return (
     <section
-      className={`px-5 pt-16 pb-10 large-container ${className} ${
+      className={`px-3 pt-5 large-container ${className} ${
         !loading && !featuredVehicles.length ? "hidden" : ""
       }`}
     >
-      <h5 className="mb-6 text-2xl font-bold text-center">Deals of the day</h5>
+      <h5 className="text-2xl font-bold text-center">Deals of the day</h5>
 
       <div className="mt-3">
-        <div className="mt-10 gap-5 justify-between">
-          {loading && "Loading..."}
+        <div className="mt-6 gap-5 justify-between">
+          {loading && <div className="px-3">Loading...</div>}
           {!loading && (
             <Carousel responsive={responsive} autoPlay rewind rewindWithAnimation>
               {featuredVehicles.map((vehicle) => (
