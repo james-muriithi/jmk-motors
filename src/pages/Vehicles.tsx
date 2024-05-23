@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { Button, Modal } from "flowbite-react";
+import { useFirestore } from "reactfire";
 import FiltersCard from "../components/FiltersCard";
 import VehicleCard from "../components/vehicle/VehicleCard";
 import { fetchVehicles, VehicleState } from "../store/vehicleSlice";
-import { useFirestore } from "reactfire";
 import { AppDispatch } from "../store";
 import {
   setMake,
@@ -18,6 +18,7 @@ import {
   setMaxPrice,
   setTransmission,
 } from "../store/searchSlice";
+import VehicleCardSkeleton from "../components/vehicle/VehicleCardSkeleton";
 
 export default function Vehicles() {
   const [openModal, setOpenModal] = useState(false);
@@ -91,7 +92,13 @@ export default function Vehicles() {
           </Button>
           <FiltersCard className="hidden sm:block" />
         </div>
-        {loading && "Loading..."}
+        {loading &&
+          [...Array(6)].map((_, index) => (
+            <VehicleCardSkeleton
+              key={index}
+              className="col-span-12 sm:col-span-6 lg:col-span-4 2xl:col-span-3"
+            />
+          ))}
         {!loading &&
           vehicles.map((vehicle) => (
             <div

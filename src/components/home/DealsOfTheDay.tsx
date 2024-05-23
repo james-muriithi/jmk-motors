@@ -7,6 +7,7 @@ import { AppDispatch } from "../../store";
 import { fetchFeaturedVehicles, VehicleState } from "../../store/vehicleSlice";
 import VehicleCard from "../vehicle/VehicleCard";
 import "./DealsOfTheDay.scss";
+import VehicleCardSkeleton from "../vehicle/VehicleCardSkeleton";
 
 export default function DealsOfTheDay({ className }: { className: string }) {
   const dispatch = useDispatch<AppDispatch>();
@@ -44,9 +45,20 @@ export default function DealsOfTheDay({ className }: { className: string }) {
 
       <div className="mt-3">
         <div className="mt-6 gap-5 justify-between">
-          {loading && <div className="px-3">Loading...</div>}
+          {loading && (
+            <div className="grid grid-cols-3 gap-4">
+              {[...Array(3)].map((_, index) => (
+                <VehicleCardSkeleton key={index} />
+              ))}
+            </div>
+          )}
           {!loading && (
-            <Carousel responsive={responsive} autoPlay rewind rewindWithAnimation>
+            <Carousel
+              responsive={responsive}
+              autoPlay
+              rewind
+              rewindWithAnimation
+            >
               {featuredVehicles.map((vehicle) => (
                 <div className="h-full mx-2" key={vehicle.id}>
                   <VehicleCard vehicle={vehicle} />

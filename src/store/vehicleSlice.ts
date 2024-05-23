@@ -72,7 +72,11 @@ export const fetchVehicles = createAsyncThunk<any, FetchVehiclesParams>(
       orderBy("created_at", "desc")
     );
     if (model && make) {
-      vehiclesQuery = query(vehiclesQuery, where("model", "==", model));
+      vehiclesQuery = query(
+        vehiclesQuery,
+        where("model", "==", model),
+        where("make", "==", make)
+      );
     } else if (make && !model) {
       vehiclesQuery = query(vehiclesQuery, where("make", "==", make));
     }
@@ -88,7 +92,8 @@ export const fetchFeaturedVehicles = createAsyncThunk<any, FetchVehiclesParams>(
     let vehiclesQuery = query(
       vehicleCollectionRef,
       where("is_featured", "==", true),
-      limit(size),
+      orderBy("created_at", "desc"),
+      limit(size)
     );
 
     const vehicleDocs = await getDocs(vehiclesQuery);
