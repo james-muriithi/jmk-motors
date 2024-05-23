@@ -39,7 +39,7 @@ export default function SingleVehicle() {
     if(!vehicles.length) {
       dispatch(fetchVehicles({ firestore }));
     }
-  }, []);
+  }, [vehicleSlug]);
 
   const similarVehicles = vehicles
     .filter(({ slug }) => slug !== vehicleSlug)
