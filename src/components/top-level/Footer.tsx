@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <div className="max-w-[1600px] mx-auto mt-10">
-        <p className="py-2 text-white sm:py-0 text-sm">
+        <p className="py-2 text-white sm:py-0 text-sm px-3">
           <b className="uppercase">Disclaimer:</b> This website is a clone
           developed solely for educational purposes. It is not intended for
           commercial use or to compete with the

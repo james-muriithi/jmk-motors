@@ -68,11 +68,13 @@ export default function Vehicles() {
     if (searchTransmission) {
       dispatch(setTransmission(searchTransmission));
     }
-    if (searchMake) {
-      dispatch(
-        fetchVehicles({ firestore, make: searchMake, model: searchModel || "" })
-      );
-    }
+    dispatch(
+      fetchVehicles({
+        firestore,
+        make: searchMake || "",
+        model: searchModel || "",
+      })
+    );
   }, [searchParams]);
 
   return (
@@ -87,7 +89,7 @@ export default function Vehicles() {
           >
             <IconPhFunnelFill className="text-xl" />
           </Button>
-          <FiltersCard className="hidden sm:block h-full" />
+          <FiltersCard className="hidden sm:block" />
         </div>
         {loading && "Loading..."}
         {!loading &&

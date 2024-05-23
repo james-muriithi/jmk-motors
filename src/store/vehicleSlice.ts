@@ -5,6 +5,7 @@ import {
   Firestore,
   getDoc,
   getDocs,
+  limit,
   orderBy,
   query,
   where,
@@ -18,16 +19,19 @@ export interface VehicleState {
   loading: boolean;
   vehicles: Vehicle[];
   vehicle: Vehicle | null | undefined;
+  featuredVehicles: Vehicle[];
 }
 
 const initialState: VehicleState = {
   loading: false,
   vehicles: [],
+  featuredVehicles: [],
   vehicle: null,
 };
 
 interface FetchVehiclesParams extends Partial<SearchState> {
   firestore: Firestore;
+  size?: number;
 }
 
 interface FetchVehicleParams {
@@ -68,10 +72,25 @@ export const fetchVehicles = createAsyncThunk<any, FetchVehiclesParams>(
       orderBy("created_at", "desc")
     );
     if (model && make) {
-      vehiclesQuery = query(vehicleCollectionRef, where("model", "==", model));
+      vehiclesQuery = query(vehiclesQuery, where("model", "==", model));
     } else if (make && !model) {
-      vehiclesQuery = query(vehicleCollectionRef, where("make", "==", make));
+      vehiclesQuery = query(vehiclesQuery, where("make", "==", make));
     }
+    const vehicleDocs = await getDocs(vehiclesQuery);
+    return vehicleDocs.docs.map(firestoreDocToJson) as unknown as Vehicle[];
+  }
+);
+
+export const fetchFeaturedVehicles = createAsyncThunk<any, FetchVehiclesParams>(
+  "vehicles/fetchFeaturedVehicles",
+  async ({ firestore, size = 3 }) => {
+    const vehicleCollectionRef = collection(firestore, "vehicles");
+    let vehiclesQuery = query(
+      vehicleCollectionRef,
+      where("is_featured", "==", true),
+      limit(size),
+    );
+
     const vehicleDocs = await getDocs(vehiclesQuery);
     return vehicleDocs.docs.map(firestoreDocToJson) as unknown as Vehicle[];
   }
@@ -119,6 +138,17 @@ const vehicleSlice = createSlice({
         state.vehicle = action.payload;
       })
       .addCase(fetchVehicle.rejected, (state, action) => {
+        state.loading = false;
+        console.log(action.error.message);
+      })
+      .addCase(fetchFeaturedVehicles.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchFeaturedVehicles.fulfilled, (state, action) => {
+        state.loading = false;
+        state.featuredVehicles = action.payload;
+      })
+      .addCase(fetchFeaturedVehicles.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
       });

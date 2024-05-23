@@ -25,7 +25,7 @@ export default function Banner() {
   const canShowTopBrands = loading || (!loading && topBrands.length > 0);
   return (
     <>
-      <section className="px-5 py-16 medium-container">
+      <section className="px-5 pt-16 pb-10 medium-container">
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-4xl font-bold text-center text-gray-100">
@@ -41,7 +41,7 @@ export default function Banner() {
             
           </div> */}
           {canShowTopBrands && (
-            <div className="flex flex-wrap items-center justify-center mt-16 gap-8">
+            <div className="flex flex-wrap items-center justify-center mt-10 gap-5 lg:gap-8">
               {loading &&
                 [...Array(4)].map((_, index) => (
                   <div

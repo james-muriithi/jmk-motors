@@ -13,7 +13,7 @@ import {
   setTransmission,
 } from "../store/searchSlice";
 import { carTransmissions } from "../data";
-import { FormEvent, useEffect } from "react";
+import { FormEvent } from "react";
 import VehicleMakeSelect from "./filters-card/VehicleMakeSelect";
 import VehicleModelSelect from "./filters-card/VehicleModelSelect";
 
@@ -92,37 +92,38 @@ export default function FiltersCard({ className = "" }) {
             </div>
           </div>
         </div>
-        <div className="mt-6"></div>
-        <div className="mb-2 block">
-          <Label value="Price" />
-        </div>
-        <div className="flex flex-wrap sm:flex-nowrap gap-5">
-          <div className="w-full sm:max-w-[224px]">
-            <TextInput
-              id="min_price"
-              name="min_price"
-              type="number"
-              placeholder="Min Price"
-              className="w-full"
-              min={0}
-              value={minPrice}
-              onChange={(e) => dispatch(setMinPrice(e.target.value))}
-            />
+        <div className="price hidden">
+          <div className="mt-6 mb-2 block">
+            <Label value="Price" />
           </div>
-          <div className="w-full sm:max-w-[224px]">
-            <TextInput
-              id="max_price"
-              name="max_price"
-              type="number"
-              placeholder="Max Price"
-              className="w-full"
-              min={0}
-              value={maxPrice}
-              onChange={(e) => dispatch(setMaxPrice(e.target.value))}
-            />
+          <div className="flex flex-wrap sm:flex-nowrap gap-5">
+            <div className="w-full sm:max-w-[224px]">
+              <TextInput
+                id="min_price"
+                name="min_price"
+                type="number"
+                placeholder="Min Price"
+                className="w-full"
+                min={0}
+                value={minPrice}
+                onChange={(e) => dispatch(setMinPrice(e.target.value))}
+              />
+            </div>
+            <div className="w-full sm:max-w-[224px]">
+              <TextInput
+                id="max_price"
+                name="max_price"
+                type="number"
+                placeholder="Max Price"
+                className="w-full"
+                min={0}
+                value={maxPrice}
+                onChange={(e) => dispatch(setMaxPrice(e.target.value))}
+              />
+            </div>
           </div>
         </div>
-        <div className="mt-6">
+        <div className="mt-6 hidden mileage">
           <div className="mb-2 block">
             <Label value="Mileage" />
           </div>

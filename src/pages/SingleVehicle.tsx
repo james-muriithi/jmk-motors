@@ -9,7 +9,11 @@ import VehicleGallery from "../components/vehicle/vehicleGallery";
 import VehicleInfoTable from "../components/vehicle/VehicleInfoTable";
 import VehicleCard from "../components/vehicle/VehicleCard";
 import { AppDispatch } from "../store";
-import { fetchVehicle, VehicleState } from "../store/vehicleSlice";
+import {
+  fetchVehicle,
+  fetchVehicles,
+  VehicleState,
+} from "../store/vehicleSlice";
 
 export default function SingleVehicle() {
   const [openSpecificationsDrawer, setOpenSpecificationsDrawer] =
@@ -32,11 +36,14 @@ export default function SingleVehicle() {
     if (vehicleSlug) {
       dispatch(fetchVehicle({ firestore, vehicleSlug }));
     }
+    if(!vehicles.length) {
+      dispatch(fetchVehicles({ firestore }));
+    }
   }, []);
 
   const similarVehicles = vehicles
     .filter(({ slug }) => slug !== vehicleSlug)
-    .sort((a, b) => a.price - (vehicleData?.price || 0))
+    .sort((a) => a.price - (vehicleData?.price || 0))
     .sort((_, b) => (b.make === vehicleData?.make ? 1 : -1))
     .slice(0, 3);
 
@@ -93,22 +100,26 @@ export default function SingleVehicle() {
             </div>
           </div>
 
-          <div className="mt-20">
-            <h3 className="font-bold text-3xl text-center">Similar vehicles</h3>
-            <p className="text-center mt-2 text-lg text-gray-400">
-              people who viewed {vehicleData?.name} also viewed these vehicles
-            </p>
-            <div className="grid grid-cols-12 mt-8 gap-x-5 gap-y-14">
-              {similarVehicles.map((vehicle) => (
-                <div
-                  className="col-span-12 sm:col-span-6 lg:col-span-4 2xl:col-span-3"
-                  key={vehicle.id}
-                >
-                  <VehicleCard vehicle={vehicle} />
-                </div>
-              ))}
+          {!!similarVehicles.length && (
+            <div className="mt-20">
+              <h3 className="font-bold text-3xl text-center">
+                Similar vehicles
+              </h3>
+              <p className="text-center mt-2 text-lg text-gray-400">
+                people who viewed {vehicleData?.name} also viewed these vehicles
+              </p>
+              <div className="grid grid-cols-12 mt-8 gap-x-5 gap-y-14">
+                {similarVehicles.map((vehicle) => (
+                  <div
+                    className="col-span-12 sm:col-span-6 lg:col-span-4 2xl:col-span-3"
+                    key={vehicle.id}
+                  >
+                    <VehicleCard vehicle={vehicle} />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <Drawer
             openDrawer={openSpecificationsDrawer}
             onClose={() => setOpenSpecificationsDrawer(false)}
